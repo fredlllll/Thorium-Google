@@ -85,9 +85,6 @@
     <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.1\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
     </Reference>
-    <Reference Include="Thorium-Storage-Service">
-      <HintPath>..\Thorium-Computing-Farm\Source\Thorium-Storage-Service\bin\Debug\Thorium-Storage-Service.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -100,6 +97,12 @@
     <None Include="google_cloud_storage_backend_config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Thorium-Computing-Farm\Source\Thorium-Storage-Service\Thorium-Storage-Service.csproj">
+      <Project>{60ce86de-d3eb-4052-b3f7-3950ba29bb63}</Project>
+      <Name>Thorium-Storage-Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
