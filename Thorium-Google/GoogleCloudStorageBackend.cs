@@ -6,11 +6,14 @@ using Google.Cloud.Storage.V1;
 using Thorium_Storage_Service;
 using Google.Apis.Auth.OAuth2;
 using System.Reflection;
+using NLog;
 
 namespace Thorium_Google
 {
     public class GoogleCloudStorageBackend : IStorageBackend
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         string projectId;
 
         StorageClient storageClient;
@@ -20,9 +23,13 @@ namespace Thorium_Google
             FileInfo fi = new FileInfo(Assembly.GetExecutingAssembly().Location);
             string credentialsFile = Path.Combine(fi.Directory.FullName, "googlecredentials.json");
 
-            GoogleCredential gc = GoogleCredential.FromFile(credentialsFile);
+            logger.Info("credentials file: " + credentialsFile);
+
+            GoogleCredential gc = GoogleCredential.FromJson(File.ReadAllText(credentialsFile));
 
             projectId = GoogleCloudStorageBackendConfig.ProjectId;
+
+            logger.Info("project id: " + projectId);
 
             storageClient = StorageClient.Create(gc);
         }
